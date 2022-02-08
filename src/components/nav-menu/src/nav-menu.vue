@@ -6,7 +6,7 @@
     </div>
     <el-menu
       class="el-menu-vertical"
-      default-active="2"
+      :default-active="defaultPath"
       background-color="#0c2135"
       text-color="#b7bdc3"
       :collapse="collapse"
@@ -25,6 +25,7 @@
               v-for="subItem in item.children"
               :key="subItem.id"
               :index="subItem.id.toString()"
+              @click="handleSelect(subItem)"
             >
               <el-icon v-if="subItem.icon">
                 <component :is="transformIcon(subItem.icon)"></component>
@@ -47,8 +48,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useState } from '@/utils/hooks/useStore';
+import { useRouter, useRoute } from 'vue-router';
+import { route2menu } from '@/utils/handleRoutes';
 
 export default defineComponent({
   props: {
@@ -59,6 +62,15 @@ export default defineComponent({
   },
   setup() {
     const { userMenus } = useState('login', ['userMenus']);
+    const router = useRouter();
+    const route = useRoute();
+    const menu = route2menu(userMenus.value, route.path);
+    const defaultPath = ref(menu.id + '');
+
+    const handleSelect = (data: any) => {
+      console.log(data.url);
+      router.push(data.url ?? '/not-found');
+    };
     const transformIcon = (icon: string) => {
       const reg = /^el-icon-/;
       const result = icon.replace(reg, '');
@@ -67,6 +79,8 @@ export default defineComponent({
     return {
       userMenus,
       transformIcon,
+      handleSelect,
+      defaultPath,
     };
   },
 });

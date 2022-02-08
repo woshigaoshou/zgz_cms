@@ -8,6 +8,7 @@ import { ILoginState } from './types';
 import { IRootState } from '../../types';
 import storage from '@/utils/storage';
 import router from '@/router';
+import { handleRoutes } from '@/utils/handleRoutes';
 
 const loginModule: Module<ILoginState, IRootState> = {
   namespaced: true,
@@ -26,14 +27,20 @@ const loginModule: Module<ILoginState, IRootState> = {
     changeUserInfo(state, userInfo: any) {
       state.userInfo = userInfo;
     },
-    changeUserMenus(state, userMenus: string) {
+    changeUserMenus(state, userMenus: any) {
       state.userMenus = userMenus;
+      const routes = handleRoutes(userMenus);
+      routes.forEach(route => {
+        // console.log(route);
+
+        router.addRoute('main', route);
+      });
     },
   },
   actions: {
     async loginAction({ commit }, payload) {
-      console.log(payload);
-      console.log('action');
+      // console.log(payload);
+      // console.log('action');
       const loginResult = await accountLogin(payload);
       const { id, token } = loginResult.data;
       commit('changeToken', token);

@@ -4,18 +4,17 @@ import 'normalize.css';
 import '@/assets/css/index.scss';
 import App from './App.vue';
 import router from '@/router/index';
-import store from '@/store/index';
+import store, { setupStore } from '@/store/index';
 // import instance from '@/service/index';
 
 const app = createApp(App);
 // registerApp(app);
 app.use(globalRegister);
-app.use(router);
 app.use(store);
+setupStore();
+app.use(router);
 
 app.mount('#app');
-
-store.dispatch('login/loadLoginInfo');
 
 // instance.request({
 //   url: '/goods',

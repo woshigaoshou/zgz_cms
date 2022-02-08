@@ -1,14 +1,18 @@
 <template>
-  <div>
-    <el-container>
+  <div class="main">
+    <el-container class="main-content">
       <el-aside :width="collapse ? '65px' : '210px'">
         <nav-menu :collapse="collapse" />
       </el-aside>
-      <el-container>
-        <el-header>
+      <el-container class="page">
+        <el-header class="page-header">
           <nav-header @foldChange="handleFoldChange" />
         </el-header>
-        <el-main>Main</el-main>
+        <el-main class="page-content">
+          <div class="page-info">
+            <router-view></router-view>
+          </div>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -38,44 +42,62 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.common-layout {
-  .el-header,
-  .el-footer {
-    background-color: #b3c0d1;
-    color: var(--el-text-color-primary);
-    text-align: center;
-    line-height: 60px;
-  }
+.main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
-  .el-footer {
-    line-height: 60px;
-  }
+.main-content,
+.page {
+  height: 100%;
+}
 
-  .el-aside {
-    background-color: #d3dce6;
-    color: var(--el-text-color-primary);
-    text-align: center;
-    line-height: 200px;
+.page-content {
+  height: calc(100% - 48px);
+  .page-info {
+    background-color: #fff;
+    border-radius: 5px;
   }
+}
 
-  .el-main {
-    background-color: #e9eef3;
-    color: var(--el-text-color-primary);
-    text-align: center;
-    line-height: 160px;
-  }
+.el-container {
+  height: 100%;
+}
 
-  body > .el-container {
-    margin-bottom: 40px;
-  }
+.el-header,
+.el-footer {
+  display: flex;
+  color: #333;
+  text-align: center;
+  align-items: center;
+}
 
-  .el-container:nth-child(5) .el-aside,
-  .el-container:nth-child(6) .el-aside {
-    line-height: 260px;
-  }
+.el-header {
+  height: 48px !important;
+}
 
-  .el-container:nth-child(7) .el-aside {
-    line-height: 320px;
+.el-aside {
+  overflow-x: hidden;
+  overflow-y: auto;
+  line-height: 200px;
+  text-align: left;
+  cursor: pointer;
+  background-color: #001529;
+  transition: width 0.3s linear;
+  scrollbar-width: none; /* firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+
+  &::-webkit-scrollbar {
+    display: none;
   }
+}
+
+.el-main {
+  color: #333;
+  text-align: center;
+  background-color: #f0f2f5;
 }
 </style>

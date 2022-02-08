@@ -13,6 +13,14 @@ import {
   ElHeader,
   ElAside,
   ElMain,
+  ElDropdown,
+  ElAvatar,
+  ElRow,
+  ElCol,
+  ElFormItem,
+  ElSelect,
+  ElOption,
+  ElDatePicker,
 } from 'element-plus';
 import * as ElIconModules from '@element-plus/icons';
 
@@ -29,6 +37,14 @@ const components = [
   ElHeader,
   ElAside,
   ElMain,
+  ElDropdown,
+  ElAvatar,
+  ElRow,
+  ElCol,
+  ElFormItem,
+  ElSelect,
+  ElOption,
+  ElDatePicker,
 ];
 
 export default function (app: App): void {
@@ -37,7 +53,7 @@ export default function (app: App): void {
     app.component(component.name, component);
   }
   for (const iconName in ElIconModules) {
-    console.log(iconName);
+    // console.log(iconName);
     app.component(
       iconName,
       ElIconModules[iconName as keyof typeof ElIconModules],
