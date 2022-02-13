@@ -1,11 +1,13 @@
 import { ILoginState } from './modules/login/types';
 
 export interface IRootState {
-  name: string;
+  entireDepartment: any[];
+  entireRole: any[];
+  entireMenu: any[];
 }
 
 export interface IRootWithModule {
-  login: ILoginState
+  login: ILoginState;
 }
 
-export type IStoreType = IRootState & IRootWithModule
+export type IStoreType = IRootState & IRootWithModule;

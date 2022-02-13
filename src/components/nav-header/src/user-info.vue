@@ -9,7 +9,10 @@
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item style="display: flex; align-items: center">
+        <el-dropdown-item
+          style="display: flex; align-items: center"
+          @click="handleExit"
+        >
           退出登录
           <circle-close
             style="
@@ -29,15 +32,22 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
 import { useState } from '@/utils/hooks/useStore';
+import storage from '@/utils/storage';
 
 export default defineComponent({
   setup() {
     const { userInfo } = useState('login', ['userInfo']);
-
+    const router = useRouter();
+    const handleExit = () => {
+      storage.deleteCache('token');
+      router.push('/main');
+    };
     return {
       name,
       userInfo,
+      handleExit,
     };
   },
 });

@@ -8,7 +8,12 @@
         </div>
       </slot>
     </div>
-    <el-table :data="listData" border style="width: 100%">
+    <el-table
+      v-bind="childrenProps"
+      :data="listData"
+      border
+      style="width: 100%"
+    >
       <el-table-column
         v-if="showSelectColumn"
         type="selection"
@@ -27,6 +32,7 @@
         :key="propItem.prop"
         v-bind="propItem"
         align="center"
+        show-overflow-tooltip
       >
         <template #default="scope">
           <slot :name="propItem.slotName" :row="scope.row">
@@ -35,7 +41,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <div class="footer">
+    <div class="footer" v-if="showFooter">
       <slot name="footer">
         <el-pagination
           @size-change="handleSizeChange"
@@ -84,6 +90,14 @@ export default defineComponent({
     page: {
       type: Object,
       default: () => ({ currentPage: 0, pageSize: 10 }),
+    },
+    childrenProps: {
+      type: Object,
+      default: () => ({}),
+    },
+    showFooter: {
+      type: Boolean,
+      default: true,
     },
   },
   emits: ['update:page'],

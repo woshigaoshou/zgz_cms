@@ -21,6 +21,8 @@ import {
   ElSelect,
   ElOption,
   ElDatePicker,
+  ElImage,
+  ElDialog,
 } from 'element-plus';
 import * as ElIconModules from '@element-plus/icons';
 
@@ -45,6 +47,8 @@ const components = [
   ElSelect,
   ElOption,
   ElDatePicker,
+  ElImage,
+  ElDialog,
 ];
 
 export default function (app: App): void {

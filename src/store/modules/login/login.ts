@@ -8,7 +8,7 @@ import { ILoginState } from './types';
 import { IRootState } from '../../types';
 import storage from '@/utils/storage';
 import router from '@/router';
-import { handleRoutes } from '@/utils/handleRoutes';
+import { handleRoutes, mapMenusToPermissions } from '@/utils/handleRoutes';
 
 const loginModule: Module<ILoginState, IRootState> = {
   namespaced: true,
@@ -17,6 +17,7 @@ const loginModule: Module<ILoginState, IRootState> = {
       token: '',
       userInfo: {},
       userMenus: [],
+      permissions: [],
     };
   },
   getters: {},
@@ -35,16 +36,21 @@ const loginModule: Module<ILoginState, IRootState> = {
 
         router.addRoute('main', route);
       });
+
+      // 获取用户按钮的权限
+      const permissions = mapMenusToPermissions(userMenus);
+      state.permissions = permissions;
     },
   },
   actions: {
-    async loginAction({ commit }, payload) {
+    async loginAction({ commit, dispatch }, payload) {
       // console.log(payload);
       // console.log('action');
       const loginResult = await accountLogin(payload);
       const { id, token } = loginResult.data;
       commit('changeToken', token);
       storage.setCache('token', token);
+      dispatch('getInitialDataAction', null, { root: true });
 
       const userInfoResult = await fetchUserInfo(id);
       const userInfo = userInfoResult.data;
@@ -58,9 +64,12 @@ const loginModule: Module<ILoginState, IRootState> = {
 
       router.replace('/main');
     },
-    loadLoginInfo({ commit }, payload) {
+    loadLoginInfo({ commit, dispatch }, payload) {
       const token = storage.getCache('token');
-      if (token) commit('changeToken', token);
+      if (token) {
+        commit('changeToken', token);
+        dispatch('getInitialDataAction', null, { root: true });
+      }
 
       const userInfo = storage.getCache('userInfo');
       if (userInfo) commit('changeUserInfo', userInfo);

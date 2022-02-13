@@ -5,11 +5,11 @@ export function usePageSearch() {
   const pageContentRef = ref<InstanceType<typeof pageContent>>();
   const handleReset = () => {
     console.log('reset');
-    pageContentRef.value.getPageInfo();
+    pageContentRef.value?.getPageInfo();
   };
   const handleSearch = (queryInfo: any) => {
     console.log('search');
-    pageContentRef.value.getPageInfo(queryInfo);
+    pageContentRef.value?.getPageInfo(queryInfo);
   };
   return {
     pageContentRef,

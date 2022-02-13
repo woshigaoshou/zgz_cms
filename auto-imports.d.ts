@@ -11,6 +11,7 @@ declare global {
   const ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
   const ElContainer: typeof import('element-plus/es')['ElContainer']
   const ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
+  const ElDialog: typeof import('element-plus/es')['ElDialog']
   const ElDropdown: typeof import('element-plus/es')['ElDropdown']
   const ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
   const ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
@@ -18,6 +19,7 @@ declare global {
   const ElFormItem: typeof import('element-plus/es')['ElFormItem']
   const ElHeader: typeof import('element-plus/es')['ElHeader']
   const ElIcon: typeof import('element-plus/es')['ElIcon']
+  const ElImage: typeof import('element-plus/es')['ElImage']
   const ElInput: typeof import('element-plus/es')['ElInput']
   const ElLink: typeof import('element-plus/es')['ElLink']
   const ElMain: typeof import('element-plus/es')['ElMain']
@@ -32,5 +34,6 @@ declare global {
   const ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
   const ElTabPane: typeof import('element-plus/es')['ElTabPane']
   const ElTabs: typeof import('element-plus/es')['ElTabs']
+  const ElTree: typeof import('element-plus/es')['ElTree']
 }
 export {}

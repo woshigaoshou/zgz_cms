@@ -35,9 +35,11 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from) => {
+  console.log(to.path);
+
   if (to.path !== '/login') {
     const token = storage.getCache('token');
-    if (!token) return './login';
+    if (!token) return '/login';
   }
   if (to.path === '/main') {
     console.log(defaultRoute);
