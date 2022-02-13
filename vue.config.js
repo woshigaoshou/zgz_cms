@@ -5,7 +5,7 @@ const { ElementPlusResolver } = require('unplugin-vue-components/resolvers');
 
 module.exports = {
   // 第一种方式
-  outputDir: './bundle',
+  outputDir: './build',
   devServer: {
     proxy: {
       '/api': {
