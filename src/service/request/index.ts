@@ -2,14 +2,14 @@ import Axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import type { interceptorsConfig, requestConfig } from './type';
 import { ElLoading } from 'element-plus';
-import { ILoadingInstance } from 'element-plus';
+import { LoadingInstance } from 'element-plus/lib/components/loading/src/loading';
 
 const DEFAULT_LOADING = false;
 
 export class GzRequest {
   instance: AxiosInstance;
   interceptors?: interceptorsConfig;
-  loading?: ILoadingInstance;
+  loading?: LoadingInstance;
   showLoading?: boolean;
   constructor(config: requestConfig) {
     // 创建axios实例
